@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f6f4ef" />
+  <meta name="description" content="Find real cafes around you. Filter for listed Wi-Fi and outdoor seating, then see each spot on a map." />
+  <title>Nook — find your next cafe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="#top"><span class="brand-mark">n.</span><span>nook<span class="orange">.</span></span></a>
+      <span class="top-note">GOOD COFFEE, FOUND A LITTLE CLOSER</span>
+      <a class="about-link" href="#about">How it works <span>↗</span></a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow"><i></i> YOUR DAY, YOUR KIND OF PLACE</span>
+          <h1>Find your<br />next <em>little nook.</em></h1>
+          <p>A table for getting things done. A shady seat outside. A new place to linger over one more cup.</p>
+          <form class="search-form" id="place-form">
+            <label for="place-query">Where should we look?</label>
+            <div class="search-row"><span class="search-icon" aria-hidden="true">⌕</span><input id="place-query" type="search" name="place" placeholder="Search a town or neighborhood" autocomplete="off" required /><button id="search-button" type="submit">Find cafes <span>↗</span></button></div>
+            <button class="location-link" id="location-button" type="button"><span>⌖</span> Use my current location</button>
+          </form>
+        </div>
+        <div class="hero-art" role="img" aria-label="A cup of coffee on a table beside a sunny window">
+          <div class="art-window"><div class="sun"></div><div class="horizon"></div><i></i><b></b></div>
+          <div class="leaf leaf-a"></div><div class="leaf leaf-b"></div><div class="leaf leaf-c"></div><div class="pot"></div>
+          <div class="table"></div><div class="cup"><span></span></div><div class="steam">〰</div>
+          <div class="art-caption"><span>✳</span><span><b>Find your pace.</b><small>Stay for as long as you like.</small></span></div>
+          <small class="art-credit">A LITTLE CORNER OF CALM · NO. 01</small>
+        </div>
+        <span class="hero-seal">A GOOD<br />PLACE TO<br /><b>PAUSE</b> <i>✳</i></span>
+      </section>
+
+      <section class="finder" id="finder" aria-labelledby="finder-title">
+        <div class="finder-heading"><div><span class="eyebrow"><i></i> THE NEARBY LIST</span><h2 id="finder-title">A spot for <em>today.</em></h2></div><span class="location-status" id="location-status">Search a place or use your location to get started.</span></div>
+        <div class="toolbar">
+          <div class="filters" role="group" aria-label="Filter cafes by amenities">
+            <button class="filter active" type="button" data-filter="all">All cafes</button>
+            <button class="filter" type="button" data-filter="wifi">📶 &nbsp;Wi-Fi listed</button>
+            <button class="filter" type="button" data-filter="outdoor">🌿 &nbsp;Outdoor seats</button>
+          </div>
+          <label class="radius-label" for="radius">Within <select id="radius"><option value="1500">1.5 km</option><option value="3000" selected>3 km</option><option value="5000">5 km</option></select></label>
+        </div>
+        <div class="notice" id="notice" role="status" aria-live="polite"><span class="notice-icon">✳</span><span>Choose a town above or use your location. Nook searches live OpenStreetMap listings—no sample cafes.</span></div>
+        <div class="results-layout">
+          <section class="results-panel" aria-label="Nearby cafe results"><div class="results-meta" id="results-meta">READY WHEN YOU ARE</div><div class="cafe-list" id="cafe-list"></div></section>
+          <div class="map-shell"><div id="map" aria-label="Map of cafe results"></div><span class="map-hint">Select a pin or cafe to see it on the map</span></div>
+        </div>
+      </section>
+
+      <section class="about" id="about"><span class="about-star">✳</span><div><span class="eyebrow">A NOTE ON FINDING “THE BEST”</span><h2>The right place<br />is your kind of place.</h2></div><p>We show real nearby cafes and the amenities that are actually listed—like Wi-Fi and outdoor seating. Map data can’t tell us if a room is peaceful, if the coffee is lovely, or if it feels cozy. We’ll never make up ratings to pretend otherwise.</p><span class="about-stamp">LESS GUESSING<br />MORE GOOD COFFEE</span></section>
+    </main>
+
+    <footer><a class="brand brand-small" href="#top"><span class="brand-mark">n.</span><span>nook<span class="orange">.</span></span></a><span>Place data © OpenStreetMap contributors · geocoding by Photon</span><a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Report a map issue ↗</a></footer>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
